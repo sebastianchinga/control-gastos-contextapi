@@ -4,3 +4,18 @@ export function formatCurrency(amount: number): string {
         currency: 'USD'
     }).format(amount)
 }
+
+export function formarDate(date:string): string {
+    // Creamos un objeto date
+    const dateObj = new Date(date);
+    // Creamos las opciones
+    const options: Intl.DateTimeFormatOptions = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    }
+    // Retornamos un string
+    return new Intl.DateTimeFormat('es-ES', options).format(dateObj);
+
+}
