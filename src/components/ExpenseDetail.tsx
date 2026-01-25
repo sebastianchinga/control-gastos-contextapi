@@ -6,6 +6,7 @@ import AmountDisplay from "./AmountDisplay"
 import { categories } from "../data/categories"
 // Importamos estilos de la dependencia
 import "react-swipeable-list/dist/styles.css"
+import { useBudget } from "../hooks/useBudget"
 
 type ExpenseDetailProps = {
     expense: Expense
@@ -14,6 +15,7 @@ type ExpenseDetailProps = {
 export default function ExpenseDetail({ expense }: ExpenseDetailProps) {
     // Filtramos las categorias que coincidan con expense.categoria y traemos la primera coincidencia del array ([0])
     const categoryInfo = useMemo(() => categories.filter(cat => cat.id === expense.category)[0], [expense])
+    const {dispatch} = useBudget();
 
     // Funcion que retorna un componente
     const leadingActions = () => (
@@ -30,7 +32,7 @@ export default function ExpenseDetail({ expense }: ExpenseDetailProps) {
     const trailingActions = () => (
         <TrailingActions>
             <SwipeAction
-                onClick={() => {}}
+                onClick={() => dispatch({type: 'remove-expense', payload: {id: expense.id}})}
                 destructive={true}
             >
                 Eliminar
@@ -42,7 +44,7 @@ export default function ExpenseDetail({ expense }: ExpenseDetailProps) {
         <SwipeableList>
 
             <SwipeableListItem 
-                maxSwipe={30} // Pixeles que se recorran para que se disparen las acciones
+                maxSwipe={1} // Pixeles que se recorran para que se disparen las acciones
                 leadingActions={leadingActions()} // Para que comience arrastrar desde la izquierda hasta la derecha
                 trailingActions={trailingActions()} // Para que comience arrastrar desde la derecha hasta la izquierda
             >
