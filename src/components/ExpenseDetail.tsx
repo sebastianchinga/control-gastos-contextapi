@@ -15,13 +15,13 @@ type ExpenseDetailProps = {
 export default function ExpenseDetail({ expense }: ExpenseDetailProps) {
     // Filtramos las categorias que coincidan con expense.categoria y traemos la primera coincidencia del array ([0])
     const categoryInfo = useMemo(() => categories.filter(cat => cat.id === expense.category)[0], [expense])
-    const {dispatch} = useBudget();
+    const { dispatch } = useBudget();
 
     // Funcion que retorna un componente
     const leadingActions = () => (
         <LeadingActions>
             <SwipeAction
-                onClick={() => {}}
+                onClick={() => dispatch({ type: 'get-expense-by-id', payload: { id: expense.id } })}
             >
                 Actualizar
             </SwipeAction>
@@ -32,7 +32,7 @@ export default function ExpenseDetail({ expense }: ExpenseDetailProps) {
     const trailingActions = () => (
         <TrailingActions>
             <SwipeAction
-                onClick={() => dispatch({type: 'remove-expense', payload: {id: expense.id}})}
+                onClick={() => dispatch({ type: 'remove-expense', payload: { id: expense.id } })}
                 destructive={true}
             >
                 Eliminar
@@ -43,7 +43,7 @@ export default function ExpenseDetail({ expense }: ExpenseDetailProps) {
     return (
         <SwipeableList>
 
-            <SwipeableListItem 
+            <SwipeableListItem
                 maxSwipe={1} // Pixeles que se recorran para que se disparen las acciones
                 leadingActions={leadingActions()} // Para que comience arrastrar desde la izquierda hasta la derecha
                 trailingActions={trailingActions()} // Para que comience arrastrar desde la derecha hasta la izquierda
