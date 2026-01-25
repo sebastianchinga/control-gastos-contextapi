@@ -10,6 +10,18 @@ export type BudgetActions =
     { type: 'get-expense-by-id', payload: { id: Expense['id'] } } |
     { type: 'update-expense', payload: { expense: Expense } }
 
+// Traer el budget desde localStorage
+const initialBudget = (): number => {
+    const localStorageBudget = localStorage.getItem('budget');
+    return localStorageBudget ? +localStorageBudget : 0
+}
+
+// Traer expenses desde localStorage
+const localStorageExpenses = (): Expense[] => {
+    const localStorageExpenses = localStorage.getItem('expenses');
+    return localStorageExpenses ? JSON.parse(localStorageExpenses) : []
+}
+
 export type BudgetState = {
     budget: number
     modal: boolean,
@@ -18,9 +30,9 @@ export type BudgetState = {
 }
 
 export const initialState: BudgetState = {
-    budget: 0,
+    budget: initialBudget(),
     modal: false,
-    expenses: [],
+    expenses: localStorageExpenses(),
     editingId: ''
 }
 
