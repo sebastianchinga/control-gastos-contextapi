@@ -4,10 +4,9 @@ import AmountDisplay from "./AmountDisplay";
 
 export default function BudgetTracker() {
 
-  const { state } = useBudget();
+  const { totalExpenses, remainingBudget, state } = useBudget();
 
-  const totalExpenses = useMemo(() => state.expenses.reduce((total, expense) => expense.amount + total, 0 ), [state.expenses])
-  const remainingBudget = state.budget - totalExpenses
+  
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
