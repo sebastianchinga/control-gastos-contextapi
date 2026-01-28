@@ -1,12 +1,9 @@
-import { useMemo } from "react";
 import { useBudget } from "../hooks/useBudget";
 import AmountDisplay from "./AmountDisplay";
 
 export default function BudgetTracker() {
 
-  const { totalExpenses, remainingBudget, state } = useBudget();
-
-  
+  const { totalExpenses, remainingBudget, state } = useBudget();  
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
