@@ -5,7 +5,7 @@ import "react-circular-progressbar/dist/styles.css"; // Imprtando hoja de estilo
 
 export default function BudgetTracker() {
 
-  const { totalExpenses, remainingBudget, state } = useBudget();  
+  const { totalExpenses, remainingBudget, state, dispatch } = useBudget();  
 
   // toFixed: La cantidad de decimales
   const percentage = +((totalExpenses / state.budget) * 100).toFixed(2)
@@ -27,6 +27,7 @@ export default function BudgetTracker() {
 
       <div className="flex flex-col justify-center items-center gap-8">
         <button
+          onClick={() => dispatch({type: 'reset-app'})}
           type="button"
           className="bg-pink-600 w-full p-2 text-white uppercase font-bold rounded-lg cursor-pointer"
         >
